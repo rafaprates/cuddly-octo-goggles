@@ -39,11 +39,9 @@ class API:
         
         end_time = time.time()
         if end_time - self.start_time < minutes*60:
-            print('has_time_elapsed() -> FALSE')
-            print('self.start_time', self.start_time)
             return False
         else:
             # Se se passou 15min, resete o relógio.
             self.start_time = time.time()
-            print('has_time_elapsed TRUE')
+
             return True
