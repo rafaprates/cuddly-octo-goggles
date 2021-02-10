@@ -3,7 +3,7 @@ import requests, time
 class API():
     def __init__(self, user):
         self.user = user
-        self.URL = "http://127.0.0.1:8000/users/" + self.user + "/kwh/"
+        self.URL = "https://dry-lake-12607.herokuapp.com/users/" + self.user + "/kwh/"
 class API:
     def __init__(self):
         self.URL = "http://127.0.0.1:8000/users/rafael/kwh"
@@ -12,7 +12,7 @@ class API:
         self.post_data = dict()
 
 
-    def post_to_api(self, user, data):
+    def post_to_api(self, data):
         '''Presume que user seja string e que data seja um dicionário'''
         
         # Se o tempo determinado ainda não passou, atualiza os valores de post_data.
