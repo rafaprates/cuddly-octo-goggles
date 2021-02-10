@@ -4,6 +4,9 @@ class API():
     def __init__(self, user):
         self.user = user
         self.URL = "http://127.0.0.1:8000/users/" + self.user + "/kwh/"
+class API:
+    def __init__(self):
+        self.URL = "http://127.0.0.1:8000/users/rafael/kwh"
         self.start_time = time.time()
         self.end_time = 0
         self.post_data = dict()
@@ -43,4 +46,6 @@ class API():
         else:
             # Se se passou 15min, resete o relógio.
             self.start_time = time.time()
+            return True
+
             return True
