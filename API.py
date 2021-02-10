@@ -1,20 +1,17 @@
 import requests, time
 
-class API():
+class API:
     def __init__(self, user):
         self.user = user
-        self.URL = "https://dry-lake-12607.herokuapp.com/users/" + self.user + "/kwh/"
-class API:
-    def __init__(self):
-        self.URL = "http://127.0.0.1:8000/users/rafael/kwh"
+        self.URL = "https://dry-lake-12607.herokuapp.com/"
+        #self.URL = "https://dry-lake-12607.herokuapp.com/users/" + self.user + "/kwh/"
         self.start_time = time.time()
-        self.end_time = 0
         self.post_data = dict()
 
-
-    def post_to_api(self, data):
+    def post(self, data):
         '''Presume que user seja string e que data seja um dicionário'''
         
+        self.URL = self.URL + 'users/' + self.user + "/kwh/"
         # Se o tempo determinado ainda não passou, atualiza os valores de post_data.
         key = list(data).pop()
         if key in list(self.post_data):
@@ -34,6 +31,15 @@ class API:
             self.post_data.clear()
             return 
         return
+
+    def get_all_users(self):
+        '''Retorna todos os usuários cadastrados'''
+        r = requests.get(self.URL)
+        print(r.text)
+
+    def create_new_user(self, fist_name, last_name):
+        '''Cria um novo usuário'''
+        request.post(self.URL + '/users/')
 
 
     def has_time_elapsed(self, minutes):
