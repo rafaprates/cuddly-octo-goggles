@@ -53,5 +53,3 @@ class API:
             # Se se passou 15min, resete o relógio.
             self.start_time = time.time()
             return True
-
-            return True
