@@ -10,5 +10,5 @@ api = API.API(user_name)
 # Escrevendo um dado ao banco
 # Presume que data seja um dicionário, onde as keys são strings que representam o nome do equipamento e os values é a potência consumida pelo equipamento.
 # Exemplo: data = {'geladeira': 1500}
-api.write_to_api(data)
+api.post(data)
 ```

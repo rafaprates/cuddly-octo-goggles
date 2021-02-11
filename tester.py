@@ -1,15 +1,17 @@
-import API
+import API 
 import time
 
 
-api = API.API('rafael')
+
+api = API.API()
 
 
 while True:
-    time.sleep(31)
+    time.sleep(10)
     data = {'geladeira': 888}
     print('enviando ', list(data).pop(), '=', data[list(data).pop()])
-    api.post_to_api('rafael', data)
+    api.post('rafael', data)
+
 
 
 

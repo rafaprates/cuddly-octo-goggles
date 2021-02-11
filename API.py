@@ -1,16 +1,15 @@
 import requests, time
 
 class API:
-    def __init__(self, user):
-        self.user = user
+    def __init__(self):
         self.URL = "https://dry-lake-12607.herokuapp.com/"
         self.start_time = time.time()
         self.post_data = dict()
 
-    def post(self, data):
+    def post(self, user, data):
         '''Presume que user seja string e que data seja um dicionário'''
         
-        self.URL = self.URL + 'users/' + self.user + "/kwh/"
+        self.user = user
         # Se o tempo determinado ainda não passou, atualiza os valores de post_data.
         key = list(data).pop()
         if key in list(self.post_data):
@@ -26,19 +25,31 @@ class API:
                 self.post_data = dict()
                 self.post_data["eq"] = key
                 self.post_data["kwh"] = value
-                r = requests.post(self.URL, self.post_data)
+                print(self.post_data)
+                r = requests.post(self.URL + 'users/' + self.user + '/kwh', self.post_data)
+                print(self.URL + 'users/' + self.user + '/kwh')
+                print(r)
             self.post_data.clear()
             return 
         return
 
-    def get_all_users(self):
-        '''Retorna todos os usuários cadastrados'''
-        r = requests.get(self.URL)
-        print(r.text)
 
-    def create_new_user(self, fist_name, last_name):
-        '''Cria um novo usuário'''
-        request.post(self.URL + '/users/')
+    def get_all_users(self):
+        '''Retorna todos os usuários cadastrados como JSON'''
+        r = requests.get(self.URL + 'users/')
+        print(r.text)
+        return r.text
+
+    def create_new_user(self, first_name, last_name):
+        '''Cria um novo usuário.
+        Presume que first_name e last_name sejam Strings'''
+        #new_user = {'first_name': self.first_name, 'last_name': self.last_name}
+        new_user = dict()
+        new_user['first_name'] = self.first_name
+        new_user['last_name'] = self.last_name
+        request.post(self.URL + '/users/', new_user)
+        return
+
 
 
     def has_time_elapsed(self, minutes):
@@ -46,9 +57,10 @@ class API:
         Retorna True se minutes*60 segundos se passaram.''' 
         
         end_time = time.time()
-        if end_time - self.start_time < minutes*60:
+        if end_time - self.start_time < minutes*10:
             return False
         else:
             # Se se passou 15min, resete o relógio.
             self.start_time = time.time()
+            print('se passaram x min')
             return True
