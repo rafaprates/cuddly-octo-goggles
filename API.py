@@ -4,7 +4,6 @@ class API:
     def __init__(self, user):
         self.user = user
         self.URL = "https://dry-lake-12607.herokuapp.com/"
-        #self.URL = "https://dry-lake-12607.herokuapp.com/users/" + self.user + "/kwh/"
         self.start_time = time.time()
         self.post_data = dict()
 
@@ -52,6 +51,4 @@ class API:
         else:
             # Se se passou 15min, resete o relógio.
             self.start_time = time.time()
-            return True
-
             return True
